@@ -1,6 +1,6 @@
 import pytest
 from dc_butler.__init__ import split_message_argument, convert_time_to_seconds
-from dc_butler import on_message
+from dc_butler import on_message, parse_command
 
 
 class MockMessage:
@@ -19,7 +19,13 @@ class MockChannel:
 
 
 def test_split_message_argument():
-    assert split_message_argument('/타이머 1시간 뒤에 알려줘') == '1시간 뒤에 알려줘'
+    assert split_message_argument('/타이머 1시간 뒤에 알려줘') == (
+        '타이머', '1시간 뒤에 알려줘'
+    )
+
+
+def test_parse_command():
+    assert parse_command('/타이머 1시간 뒤에 알려줘') == '타이머'
 
 
 def test_convert_time_to_seconds():

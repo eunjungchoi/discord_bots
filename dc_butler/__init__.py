@@ -26,7 +26,7 @@ async def on_message(message):
     print(message.content)
 
     if message.content.startswith('/타이머'):
-        arg = split_message_argument(message.content)
+        command, arg = split_message_argument(message.content)
 
         if arg == 'help':
             await message.channel.send(help_message)
@@ -37,10 +37,17 @@ async def on_message(message):
         duration = convert_time_to_seconds(arg)
         await asyncio.sleep(duration)
         await message.channel.send(arg + ' 됐습니다 :coffee:')
+def parse_command(content):
+    if content[0] != '/':
+        return None
+    command_with_slash = content.split(' ')[0]
+    return command_with_slash[1:]
 
 
 def split_message_argument(content):
-    return content[len('/타이머'):].strip()
+    command = parse_command(content)
+    message = content[len(command)+1:].strip()
+    return command, message
 
 
 def convert_time_to_seconds(arg):
