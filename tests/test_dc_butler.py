@@ -1,4 +1,4 @@
-from timer_bot import split_message_argument, convert_time_to_seconds
+from dc_butler.init__ import split_message_argument, convert_time_to_seconds
 
 
 def test_split_message_argument():
