@@ -17,26 +17,35 @@ async def on_ready():
     print('We have logged in as {0.user}'.format(client))
 
 
+async def timer_handler(message, arg):
+    if arg == 'help':
+        await message.channel.send(help_message)
+        return
+
+    await message.channel.send(arg + ' 뒤에 알려드릴게요 :ok_hand:')
+
+    duration = convert_time_to_seconds(arg)
+    await asyncio.sleep(duration)
+    await message.channel.send(arg + ' 됐습니다 :coffee:')
+
+
 @client.event
 async def on_message(message):
     if message.author == client.user:
         return
 
-    # print(message)
-    print(message.content)
+    dispatch_handlers = {
+        '타이머': timer_handler,
+    }
 
-    if message.content.startswith('/타이머'):
-        command, arg = split_message_argument(message.content)
+    command, arg = split_message_argument(message.content)
+    dispatch_handler = dispatch_handlers.get(command)
+    if not dispatch_handler:
+        # error message
+        pass
+    await dispatch_handler(message, arg)
 
-        if arg == 'help':
-            await message.channel.send(help_message)
-            return
 
-        await message.channel.send(arg + ' 뒤에 알려드릴게요 :ok_hand:')
-
-        duration = convert_time_to_seconds(arg)
-        await asyncio.sleep(duration)
-        await message.channel.send(arg + ' 됐습니다 :coffee:')
 def parse_command(content):
     if content[0] != '/':
         return None
