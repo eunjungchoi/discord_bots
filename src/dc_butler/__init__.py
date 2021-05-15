@@ -1,9 +1,7 @@
 import asyncio
 import os
-import time
 
 import discord
-from discord.ext import commands
 
 client = discord.Client()
 TOKEN = os.getenv("DISCORD_TOKEN")

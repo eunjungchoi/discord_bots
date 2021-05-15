@@ -1,2 +1,4 @@
-discord.py
 pytest-asyncio
+pytest~=6.2.4
+setuptools~=56.1.0
+discord.py~=1.7.2
