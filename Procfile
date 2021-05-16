@@ -1,1 +1,1 @@
-web: python src/dc_butler/__init__.py
+worker: python src/dc_butler/__init__.py
