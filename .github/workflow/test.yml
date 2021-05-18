@@ -1,0 +1,8 @@
+name: test CI
+on: [push]
+jobs:
+  run pytest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: pytest
