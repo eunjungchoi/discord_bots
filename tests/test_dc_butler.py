@@ -1,6 +1,6 @@
 import pytest
-from src.dc_butler import split_message_argument, convert_time_to_seconds
-from src.dc_butler import on_message, parse_command
+from dc_butler import split_message_argument, convert_time_to_seconds
+from dc_butler import on_message, parse_command
 
 
 class MockMessage:

@@ -1,1 +1,1 @@
-worker: python src/dc_butler/__init__.py
+worker: python -m dc_butler

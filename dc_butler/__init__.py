@@ -6,13 +6,13 @@ import discord
 client = discord.Client()
 TOKEN = os.getenv("DISCORD_TOKEN")
 help_message = """원하는 시간을 입력해주세요. 그때가 되면 타이머봇이 시간을 알려드릴게요.
-예시) 10분, 1시간 25분, 2분 30초 
+예시) 10분, 1시간 25분, 2분 30초
 """
 
 
 @client.event
 async def on_ready():
-    print('We have logged in as {0.user}'.format(client))
+    print(f'We have logged in as {client.user}')
 
 
 async def timer_handler(message, arg):
