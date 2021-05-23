@@ -1,1 +1,1 @@
-worker: python -m dc_butler
+worker: python -m dc_butler production
