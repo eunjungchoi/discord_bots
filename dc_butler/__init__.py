@@ -48,6 +48,9 @@ async def on_message(message):
     }
 
     command, arg = split_message_argument(message.content)
+    if not command:
+        return
+
     dispatch_handler = dispatch_handlers.get(command)
     if not dispatch_handler:
         # error message
@@ -63,9 +66,10 @@ def parse_command(content):
 
 
 def split_message_argument(content):
-    command = parse_command(content)
-    message = content[len(command)+1:].strip()
-    return command, message
+    if command := parse_command(content):
+        message = content[len(command)+1:].strip()
+        return command, message
+    return None, None
 
 
 def convert_time_to_seconds(arg):

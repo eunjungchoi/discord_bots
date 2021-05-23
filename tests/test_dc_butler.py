@@ -26,6 +26,7 @@ def test_split_message_argument():
 
 def test_parse_command():
     assert parse_command('/타이머 1시간 뒤에 알려줘') == '타이머'
+    assert parse_command('1시간 뒤에') is None
 
 
 def test_convert_time_to_seconds():
