@@ -1,6 +1,12 @@
 import pytest
+
 from dc_butler import split_message_argument, convert_time_to_seconds
 from dc_butler import on_message, parse_command
+from dc_butler import client
+
+client.LOCAL_BOT_CHANNEL_ID = '1234'
+CHANNEL_ID = '1234'
+ENV = 'local'
 
 
 class MockMessage:
@@ -13,6 +19,7 @@ class MockMessage:
 class MockChannel:
     def __init__(self):
         self.send_buffer = []
+        self.id = 1
 
     async def send(self, content):
         self.send_buffer.append(content)
@@ -37,6 +44,17 @@ def test_convert_time_to_seconds():
 @pytest.mark.asyncio
 async def test_on_message():
     message = MockMessage('/타이머 5초')
+    client.ENV = 'production'
+    await on_message(message)
+    assert message.channel.send_buffer[0] == '5초 뒤에 알려드릴게요 :ok_hand:'
+    assert message.channel.send_buffer[1] == '5초 됐습니다 :coffee:'
+
+
+@pytest.mark.asyncio
+async def test_on_message_local():
+    message = MockMessage('/타이머 5초')
+    message.channel.id = CHANNEL_ID
+    client.ENV = 'local'
     await on_message(message)
     assert message.channel.send_buffer[0] == '5초 뒤에 알려드릴게요 :ok_hand:'
     assert message.channel.send_buffer[1] == '5초 됐습니다 :coffee:'
