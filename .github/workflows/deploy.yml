@@ -10,5 +10,5 @@ jobs:
       - uses: actions/checkout@v2
       - name: post call to deploy
           run: |
-            curl -X POST -H "Authorization: Bearer ${{ secrets.DO_ACCESS_TOKEN }}" "https://api.digitalocean.com/v2/apps/${{ sectrets.DO_APP_ID }}/deploymensts"
+            curl -X POST -H "Authorization: Bearer ${{ secrets.DO_ACCESS_TOKEN }}" "https://api.digitalocean.com/v2/apps/${{ secrets.DO_APP_ID }}/deploymensts"
 
