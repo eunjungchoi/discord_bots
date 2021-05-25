@@ -32,7 +32,7 @@ async def timer_handler(message, arg):
 
 def is_local_channel(channel_id):
     if not LOCAL_BOT_CHANNEL_ID:
-        return True
+        return False
     return channel_id == int(LOCAL_BOT_CHANNEL_ID)
 
 
