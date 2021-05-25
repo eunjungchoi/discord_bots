@@ -1,0 +1,14 @@
+name: deploy
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy_to_digitalocean:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: post call to deploy
+          run: |
+            curl -X POST -H "Authorization: Bearer ${{ secrets.DO_ACCESS_TOKEN }}" "https://api.digitalocean.com/v2/apps/${{ sectrets.DO_APP_ID }}/deploymensts"
+
