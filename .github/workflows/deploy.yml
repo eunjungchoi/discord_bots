@@ -5,6 +5,8 @@ on:
       - main
 jobs:
   deploy_to_digitalocean:
+    needs: run_pytest
+
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
