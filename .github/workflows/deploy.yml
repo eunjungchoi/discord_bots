@@ -9,10 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: post call to deploy
-        env:
-          DO_ACCESS_TOKEN: ${{ secrets.DO_ACCESS_TOKEN }}
-          DO_APP_ID: ${{ secrets.DO_APP_ID }}
         run: |
-          curl -X POST -H "Authorization: Bearer ${{ env.DO_ACCESS_TOKEN }}" "https://api.digitalocean.com/v2/apps/${{ env.DO_APP_ID }}/deployments"
+          curl -X POST -H "Authorization: Bearer ${{ secrets.DO_ACCESS_TOKEN }}" "https://api.digitalocean.com/v2/apps/${{ secrets.DO_APP_ID }}/deployments"
 
 
